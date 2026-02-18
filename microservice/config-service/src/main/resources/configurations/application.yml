@@ -1,0 +1,18 @@
+# configuração em comum para todos services.yml na pasta configurations
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+name:
+  value: ecommerce
+spring:
+  cloud:
+    config:
+      override-system-properties: false #override application.yml dos microservices = false
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

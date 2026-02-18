@@ -5,5 +5,6 @@
     <file url="file://$PROJECT_DIR$/microservice/config-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservice/discovery-service/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservice/discovery-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservice/produto-service/src/main/java" charset="UTF-8" />
   </component>
 </project>
