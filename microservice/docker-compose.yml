@@ -2,6 +2,7 @@ services:
   postgresql:
     container_name: ms_pg_sql
     image: postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: usuario
       POSTGRES_PASSWORD: senha
@@ -12,11 +13,11 @@ services:
       - "5432:5432"
     networks:
       - microservices-net
-    restart: unless-stopped
 
   pgadmin:
     container_name: ms_pgadmin
     image: dpage/pgadmin4
+    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
@@ -27,11 +28,10 @@ services:
       - "5050:80"
     networks:
       - microservices-net
-    restart: unless-stopped
 
   mongodb:
-    image: mongo
     container_name: mongo_db
+    image: mongo
     ports:
       - 27017:27017
     volumes:
@@ -43,9 +43,9 @@ services:
       - microservices-net
 
   mongo-express:
-    image: mongo-express
     container_name: mongo_express
-    restart: always
+    image: mongo-express
+    restart: unless-stopped
     ports:
       - 8081:8081
     environment:
