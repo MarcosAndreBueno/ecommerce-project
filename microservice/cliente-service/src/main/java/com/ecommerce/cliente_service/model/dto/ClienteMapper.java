@@ -20,7 +20,7 @@ public class ClienteMapper {
                 .build();
     }
 
-    public ClienteResponse fromCliente(Cliente cliente) {
+    public ClienteResponse toClienteResponse(Cliente cliente) {
         if (cliente == null) {
             return null;
         }

@@ -55,13 +55,13 @@ public class ClienteService {
     public List<ClienteResponse> findAllClientes() {
         return this.clienteRepository.findAll()
                 .stream()
-                .map(this.clienteMapper::fromCliente)
+                .map(this.clienteMapper::toClienteResponse)
                 .collect(Collectors.toList());
     }
 
     public ClienteResponse findById(String id) {
         return this.clienteRepository.findById(id)
-                .map(clienteMapper::fromCliente)
+                .map(clienteMapper::toClienteResponse)
                 .orElseThrow(() -> new ClienteNotFoundException(String.format("Nenhum cliente encontrado para o id: %s", id)));
     }
 
