@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/order
+    username: postgres
+  jpa:
+    #hibernate: #implementar
+      #ddl-auto: create
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8070
+
+application:
+  config: # posteriormente, alterar portas para gateway
+    cliente-url: http://localhost:8090/api/v1/clientes
+    produto-url: http://localhost:8050/api/v1/produtos
