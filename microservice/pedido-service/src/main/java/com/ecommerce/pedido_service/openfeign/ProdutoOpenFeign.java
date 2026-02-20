@@ -1,4 +1,4 @@
-package com.ecommerce.pedido_service.config;
+package com.ecommerce.pedido_service.openfeign;
 
 import com.ecommerce.pedido_service.model.DTO.ProdutoCompraRequest;
 import com.ecommerce.pedido_service.model.DTO.ProdutoCompraResponse;
