@@ -1,10 +1,10 @@
 package com.ecommerce.pedido_service.service;
 
 
-import com.ecommerce.pedido_service.config.ClienteOpenFeign;
-import com.ecommerce.pedido_service.config.ProdutoOpenFeign;
 import com.ecommerce.pedido_service.exception.PedidoException;
 import com.ecommerce.pedido_service.model.DTO.*;
+import com.ecommerce.pedido_service.openfeign.ClienteOpenFeign;
+import com.ecommerce.pedido_service.openfeign.ProdutoOpenFeign;
 import com.ecommerce.pedido_service.repository.PedidoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
