@@ -1,10 +1,10 @@
-package com.ecommerce.order_service;
+package com.ecommerce.pedido_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrderServiceApplicationTests {
+class PedidoServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

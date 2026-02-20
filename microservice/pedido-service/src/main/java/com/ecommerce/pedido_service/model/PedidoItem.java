@@ -12,16 +12,16 @@ import java.math.BigInteger;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "customer_line")
+@Table(name = "pedido_item")
 public class PedidoItem {
 
     @Id
     @GeneratedValue
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
     private Integer produtoId;
     private Integer quantidade;
-    private BigInteger preco;
+    // !!! implementar preco !!!
 }
