@@ -7,6 +7,6 @@ public record ProdutoCompraResponse(
         String nome,
         String descricao,
         BigDecimal preco,
-        double quantidade
+        Integer quantidade
 ) {
 }

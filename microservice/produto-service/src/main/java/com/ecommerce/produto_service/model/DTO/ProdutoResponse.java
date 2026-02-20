@@ -6,7 +6,7 @@ public record ProdutoResponse(
         Integer id,
         String nome,
         String descricao,
-        double quantidadeDisponivel,
+        Integer quantidadeDisponivel,
         BigDecimal preco,
         Integer categoriaId,
         String categoriaNome,
