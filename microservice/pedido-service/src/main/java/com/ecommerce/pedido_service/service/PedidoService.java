@@ -2,9 +2,12 @@ package com.ecommerce.pedido_service.service;
 
 
 import com.ecommerce.pedido_service.exception.PedidoException;
+import com.ecommerce.pedido_service.httpclient.ClienteOpenFeign;
+import com.ecommerce.pedido_service.httpclient.PagamentoClient;
+import com.ecommerce.pedido_service.httpclient.ProdutoOpenFeign;
+import com.ecommerce.pedido_service.mensageria.PedidoConfirmacao;
+import com.ecommerce.pedido_service.mensageria.PedidoProducer;
 import com.ecommerce.pedido_service.model.DTO.*;
-import com.ecommerce.pedido_service.openfeign.ClienteOpenFeign;
-import com.ecommerce.pedido_service.openfeign.ProdutoOpenFeign;
 import com.ecommerce.pedido_service.repository.PedidoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -23,18 +26,19 @@ public class PedidoService {
     private final ClienteOpenFeign clienteOpenFeign;
     private final ProdutoOpenFeign produtoOpenFeign;
     private final PedidoItemService pedidoItemService;
+    private final PedidoProducer pedidoProducer;
+    private final PagamentoClient pagamentoClient;
 
     @Transactional
     public Integer addPedido(PedidoRequest request) {
 
         // validar cliente com OpenFeign
         var cliente = this.clienteOpenFeign.findClienteById(request.clienteId())
-                .orElseThrow(() -> new PedidoException("Não pode criar pedido, pois nenhum cliente foi encontrado com o id fornecido"));
+                .orElseThrow(() -> new PedidoException("Não foi possível criar pedido, pois nenhum cliente foi encontrado com o id fornecido"));
 
         // validar produto com OpenFeign
-        var produtosComprados = produtoOpenFeign.comprarProdutos(request.produtos());
-
-        System.out.println("Produto Comprado Retornado: " + produtosComprados);
+        var produtosComprados = produtoOpenFeign.comprarProdutos(request.produtos())
+                .orElseThrow(() -> new PedidoException("Não foi possível criar pedido, pois nenhum produto foi encontrado com o id fornecido"));
 
         var pedido = this.pedidoRepository.save(pedidoMapper.toPedido(request));
 
@@ -51,9 +55,25 @@ public class PedidoService {
         }
 
         // iniciar processo de pagamento
-
+        var pagamentoRequest = new PagamentoRequest(
+                request.valorTotal(),
+                request.metodoPagamento(),
+                pedido.getId(),
+                pedido.getReferencias(),
+                cliente
+        );
+        pagamentoClient.iniciarProcessoPagamento(pagamentoRequest);
 
         // enviar confirmação de pedido via Kafka
+        pedidoProducer.enviarConfimacaoPedido(
+                new PedidoConfirmacao(
+                        request.referencias(),
+                        request.valorTotal(),
+                        request.metodoPagamento(),
+                        cliente,
+                        produtosComprados
+                )
+        );
 
 
         return pedido.getId();

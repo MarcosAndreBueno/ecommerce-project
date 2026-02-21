@@ -1,4 +1,4 @@
-package com.ecommerce.pedido_service.openfeign;
+package com.ecommerce.pedido_service.httpclient;
 
 import com.ecommerce.pedido_service.model.DTO.ClienteResponse;
 import org.springframework.cloud.openfeign.FeignClient;
