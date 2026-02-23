@@ -1,11 +1,11 @@
-package com.ecommerce.pagamento_service.mensageria;
+package com.ecommerce.pagamento_service.mensageria.payload;
 
 
-import com.ecommerce.pagamento_service.enums.MetodoPagamento;
+import com.ecommerce.pagamento_service.model.enums.MetodoPagamento;
 
 import java.math.BigDecimal;
 
-public record PagamentoNotificacaoRequest(
+public record PagamentoNotificacaoPayload(
         String pedidoReferencias,
         BigDecimal valorTotal,
         MetodoPagamento metodoPagamento,

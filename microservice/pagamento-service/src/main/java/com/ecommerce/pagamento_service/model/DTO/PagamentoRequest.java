@@ -1,6 +1,6 @@
 package com.ecommerce.pagamento_service.model.DTO;
 
-import com.ecommerce.pagamento_service.enums.MetodoPagamento;
+import com.ecommerce.pagamento_service.model.enums.MetodoPagamento;
 
 import java.math.BigDecimal;
 
@@ -10,6 +10,6 @@ public record PagamentoRequest(
         MetodoPagamento metodoPagamento,
         Integer pedidoId,
         String pedidoReferencias,
-        ClienteRequest clienteRequest
+        ClienteRequest cliente
 ) {
 }

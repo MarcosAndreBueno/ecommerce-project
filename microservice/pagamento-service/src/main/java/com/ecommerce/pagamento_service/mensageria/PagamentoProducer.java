@@ -1,5 +1,6 @@
 package com.ecommerce.pagamento_service.mensageria;
 
+import com.ecommerce.pagamento_service.mensageria.payload.PagamentoNotificacaoPayload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -12,13 +13,13 @@ import static org.springframework.kafka.support.KafkaHeaders.TOPIC;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class NotificacaoProducer {
+public class PagamentoProducer {
 
-  private final KafkaTemplate<String, PagamentoNotificacaoRequest> kafkaTemplate;
+  private final KafkaTemplate<String, PagamentoNotificacaoPayload> kafkaTemplate;
 
-  public void enviarNotificacao(PagamentoNotificacaoRequest request) {
+  public void enviarNotificacaoPagamentoConfirmado(PagamentoNotificacaoPayload request) {
     log.info("Enviando notificação com body = < {} >", request);
-    Message<PagamentoNotificacaoRequest> message = MessageBuilder
+    Message<PagamentoNotificacaoPayload> message = MessageBuilder
             .withPayload(request)
             .setHeader(TOPIC, "pagamento-topic")
             .build();

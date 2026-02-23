@@ -1,6 +1,6 @@
 package com.ecommerce.pedido_service.mensageria;
 
-import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacao;
+import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacaoPayload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,12 +15,12 @@ import static org.springframework.kafka.support.KafkaHeaders.TOPIC;
 @Slf4j
 public class PedidoProducer {
 
-    private final KafkaTemplate<String, PedidoConfirmacao> kafkaTemplate;
+    private final KafkaTemplate<String, PedidoConfirmacaoPayload> kafkaTemplate;
 
-    public void enviarConfimacaoPedido(PedidoConfirmacao pedidoConfirmacao) {
+    public void enviarNotificacaoConfimacaoPedido(PedidoConfirmacaoPayload pedidoConfirmacaoPayload) {
         log.info("Enviando confirmação de pedido");
-        Message<PedidoConfirmacao> mensagem = MessageBuilder
-                .withPayload(pedidoConfirmacao)
+        Message<PedidoConfirmacaoPayload> mensagem = MessageBuilder
+                .withPayload(pedidoConfirmacaoPayload)
                 .setHeader(TOPIC, "pedido-topic")
                 .build();
 

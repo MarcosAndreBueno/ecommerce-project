@@ -5,7 +5,7 @@ import com.ecommerce.pedido_service.exception.PedidoException;
 import com.ecommerce.pedido_service.httpclient.ClienteHttpClient;
 import com.ecommerce.pedido_service.httpclient.PagamentoHttpClient;
 import com.ecommerce.pedido_service.httpclient.ProdutoHttpClient;
-import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacao;
+import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacaoPayload;
 import com.ecommerce.pedido_service.mensageria.PedidoProducer;
 import com.ecommerce.pedido_service.model.DTO.*;
 import com.ecommerce.pedido_service.repository.PedidoRepository;
@@ -65,8 +65,8 @@ public class PedidoService {
         pagamentoHttpClient.iniciarProcessoPagamento(pagamentoRequest);
 
         // enviar confirmação de pedido via Kafka
-        pedidoProducer.enviarConfimacaoPedido(
-                new PedidoConfirmacao(
+        pedidoProducer.enviarNotificacaoConfimacaoPedido(
+                new PedidoConfirmacaoPayload(
                         request.referencias(),
                         request.valorTotal(),
                         request.metodoPagamento(),

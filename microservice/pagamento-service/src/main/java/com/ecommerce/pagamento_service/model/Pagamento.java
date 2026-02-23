@@ -1,7 +1,7 @@
 package com.ecommerce.pagamento_service.model;
 
 
-import com.ecommerce.pagamento_service.enums.MetodoPagamento;
+import com.ecommerce.pagamento_service.model.enums.MetodoPagamento;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

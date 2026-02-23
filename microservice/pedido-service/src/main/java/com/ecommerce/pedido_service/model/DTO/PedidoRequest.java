@@ -1,6 +1,6 @@
 package com.ecommerce.pedido_service.model.DTO;
 
-import com.ecommerce.pedido_service.enums.MetodoPagamento;
+import com.ecommerce.pedido_service.model.enums.MetodoPagamento;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import jakarta.validation.constraints.NotBlank;

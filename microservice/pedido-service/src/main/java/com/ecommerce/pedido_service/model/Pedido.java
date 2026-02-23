@@ -1,6 +1,6 @@
 package com.ecommerce.pedido_service.model;
 
-import com.ecommerce.pedido_service.enums.MetodoPagamento;
+import com.ecommerce.pedido_service.model.enums.MetodoPagamento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;

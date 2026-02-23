@@ -1,4 +1,4 @@
-package com.ecommerce.pagamento_service.enums;
+package com.ecommerce.pagamento_service.model.enums;
 
 public enum MetodoPagamento {
 
