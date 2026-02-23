@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      username: usuario
+      password: senha
+      host: localhost
+      port: 27017
+      database: notificacao
+      authentication-database: admin
+
+server:
+  port: 8040
