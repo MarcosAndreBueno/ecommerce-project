@@ -1,4 +1,4 @@
-package com.ecommerce.pedido_service.mensageria;
+package com.ecommerce.pedido_service.mensageria.payload;
 
 
 import com.ecommerce.pedido_service.enums.MetodoPagamento;

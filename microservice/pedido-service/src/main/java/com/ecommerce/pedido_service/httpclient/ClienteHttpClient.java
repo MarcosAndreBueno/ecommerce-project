@@ -11,7 +11,7 @@ import java.util.Optional;
         name = "cliente-service",
         url = "${application.config.cliente-url}"
 )
-public interface ClienteOpenFeign {
+public interface ClienteHttpClient {
 
     @GetMapping("/{cliente-id}")
     Optional<ClienteResponse> findClienteById(@PathVariable("cliente-id") String clienteId);

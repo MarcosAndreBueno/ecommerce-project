@@ -13,7 +13,7 @@ import java.util.Optional;
         name = "produto-service",
         url = "${application.config.produto-url}"
 )
-public interface ProdutoOpenFeign {
+public interface ProdutoHttpClient {
 
     @GetMapping("/comprar")
     Optional<List<ProdutoCompraResponse>> comprarProdutos(@RequestBody List<ProdutoCompraRequest> request);

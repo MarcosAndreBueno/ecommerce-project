@@ -1,5 +1,6 @@
 package com.ecommerce.pedido_service.mensageria;
 
+import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

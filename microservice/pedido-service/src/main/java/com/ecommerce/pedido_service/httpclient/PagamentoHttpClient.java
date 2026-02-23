@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
     name = "pagamento-service",
     url = "${application.config.pagamento-url}"
 )
-public interface PagamentoClient {
+public interface PagamentoHttpClient {
 
   @PostMapping
   Integer iniciarProcessoPagamento(@RequestBody PagamentoRequest request);
