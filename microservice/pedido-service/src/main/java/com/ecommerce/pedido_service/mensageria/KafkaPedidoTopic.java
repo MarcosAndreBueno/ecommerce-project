@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
-public class PedidoTopic {
+public class KafkaPedidoTopic {
 
     @Bean
     public NewTopic pedidoTopic() {
