@@ -21,7 +21,7 @@ public class PedidoProducer {
         log.info("Enviando confirmação de pedido");
         Message<PedidoConfirmacaoPayload> mensagem = MessageBuilder
                 .withPayload(pedidoConfirmacaoPayload)
-                .setHeader(TOPIC, "pedido-topic")
+                .setHeader(TOPIC, "pedido-confirmado-topic")
                 .build();
 
         kafkaTemplate.send(mensagem);

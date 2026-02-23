@@ -7,6 +7,33 @@ spring:
       port: 27017
       database: notificacao
       authentication-database: admin
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: pagamentoGrupo,pedidoGrupo
+      auto-offset-reset: earliest #iniciar do offset 0 para novos grupos
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping:
+          pedidoConfirmacaoPayload:com.ecommerce.notificacao_service.mensageria.payload.PedidoConfirmacaoPayload,
+          pagamentoConfirmacaoPayload:com.ecommerce.notificacao_service.mensageria.payload.PagamentoConfirmacaoPayload
+  mail:
+    host: localhost
+    port: 1025
+    username: usuario
+    password: senha
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
 
 server:
   port: 8040

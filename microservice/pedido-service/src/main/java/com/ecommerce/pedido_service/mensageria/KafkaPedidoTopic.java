@@ -9,9 +9,9 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaPedidoTopic {
 
     @Bean
-    public NewTopic pedidoTopic() {
+    public NewTopic pedidoConfirmadoTopic() {
         return TopicBuilder
-                .name("pedido-topic")
+                .name("pedido-confirmado-topic")
                 .build();
     }
 }

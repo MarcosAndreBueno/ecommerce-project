@@ -14,7 +14,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: pagamentoNotificacaoPayload:com.ecommerce.pagamento_service.mensageria.payload.PagamentoNotificacaoPayload
+        spring.json.type.mapping: pagamentoConfirmacaoPayload:com.ecommerce.pagamento_service.mensageria.payload.PagamentoConfirmacaoPayload
 
 server:
   port: 8060

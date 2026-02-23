@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record PedidoConfirmacaoPayload(
-        String pedidoReferencia,
+        String pedidoReferencias,
         BigDecimal valorTotal,
         MetodoPagamento metodoPagamento,
-        ClienteResponse clienteResponse,
-        List<ProdutoCompraResponse> produtoCompraResponses
+        ClienteResponse cliente,
+        List<ProdutoCompraResponse> produtos
 ) {
 }

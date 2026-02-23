@@ -1,7 +1,7 @@
 package com.ecommerce.pagamento_service.service;
 
 import com.ecommerce.pagamento_service.mensageria.PagamentoProducer;
-import com.ecommerce.pagamento_service.mensageria.payload.PagamentoNotificacaoPayload;
+import com.ecommerce.pagamento_service.mensageria.payload.PagamentoConfirmacaoPayload;
 import com.ecommerce.pagamento_service.model.DTO.PagamentoMapper;
 import com.ecommerce.pagamento_service.model.DTO.PagamentoRequest;
 import com.ecommerce.pagamento_service.repository.PagamentoRepository;
@@ -20,7 +20,7 @@ public class PagamentoService {
         var pagamento = this.pagamentoRepository.save(this.pagamentoMapper.toPagamento(request));
 
         this.pagamentoProducer.enviarNotificacaoPagamentoConfirmado(
-                new PagamentoNotificacaoPayload(
+                new PagamentoConfirmacaoPayload(
                         request.pedidoReferencias(),
                         request.valorTotal(),
                         request.metodoPagamento(),

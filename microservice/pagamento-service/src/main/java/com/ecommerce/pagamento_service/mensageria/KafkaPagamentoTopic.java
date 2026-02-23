@@ -9,9 +9,9 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaPagamentoTopic {
 
     @Bean
-    public NewTopic pagamentoTopic() {
+    public NewTopic pagamentoConfirmadoTopic() {
         return TopicBuilder
-                .name("pagamento-topic")
+                .name("pagamento-confirmado-topic")
                 .build();
     }
 }
