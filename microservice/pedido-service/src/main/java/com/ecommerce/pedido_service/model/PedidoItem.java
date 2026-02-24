@@ -4,6 +4,7 @@ package com.ecommerce.pedido_service.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @AllArgsConstructor
@@ -23,5 +24,5 @@ public class PedidoItem {
     private Pedido pedido;
     private Integer produtoId;
     private Integer quantidade;
-    // !!! implementar preco !!!
+    private BigDecimal preco;
 }

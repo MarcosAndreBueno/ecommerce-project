@@ -14,14 +14,15 @@ public class PedidoItemMapper {
                         .id(request.pedidoId())
                         .build())
                 .quantidade(request.quantidade())
+                .preco(request.preco())
                 .build();
     }
 
     public PedidoItemResponse toPedidoItemResponse(PedidoItem pedidoItem) {
         return new PedidoItemResponse(
                 pedidoItem.getId(),
-                pedidoItem.getQuantidade()
-                // !!! implementar preco !!!
+                pedidoItem.getQuantidade(),
+                pedidoItem.getPreco()
         );
     }
 }

@@ -11,6 +11,6 @@ public record PagamentoConfirmacaoPayload(
         MetodoPagamento metodoPagamento,
         String clienteNome,
         String clienteSobrenome,
-        String clienteEmails
+        String clienteEmail
 ) {
 }

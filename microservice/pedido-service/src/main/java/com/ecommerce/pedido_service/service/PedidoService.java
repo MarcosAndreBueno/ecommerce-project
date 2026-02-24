@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,23 +41,30 @@ public class PedidoService {
         var produtosComprados = produtoHttpClient.comprarProdutos(request.produtos())
                 .orElseThrow(() -> new PedidoException("Não foi possível criar pedido, pois nenhum produto foi encontrado com o id fornecido"));
 
-        var pedido = this.pedidoRepository.save(pedidoMapper.toPedido(request));
+        // persistir pedido
+        BigDecimal valorTotal = produtosComprados.stream()
+                .map(ProdutoCompraResponse::preco)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // persistir pedidos
+        var pedido = this.pedidoRepository.save(pedidoMapper.toPedido(request, valorTotal));
         for (ProdutoCompraRequest requestCompra : request.produtos()) {
             pedidoItemService.addPedidoItem(
                     new PedidoItemRequest(
                             null,
                             pedido.getId(),
                             requestCompra.produtoId(),
-                            requestCompra.quantidade()
+                            requestCompra.quantidade(),
+                            produtosComprados.stream()
+                                    .filter(p -> p.produtoId().equals(requestCompra.produtoId()))
+                                    .findFirst()
+                                    .get().preco()
                     )
             );
         }
 
         // iniciar processo de pagamento
         var pagamentoRequest = new PagamentoRequest(
-                request.valorTotal(),
+                valorTotal,
                 request.metodoPagamento(),
                 pedido.getId(),
                 pedido.getReferencias(),
@@ -68,7 +76,7 @@ public class PedidoService {
         pedidoProducer.enviarNotificacaoConfimacaoPedido(
                 new PedidoConfirmacaoPayload(
                         request.referencias(),
-                        request.valorTotal(),
+                        valorTotal,
                         request.metodoPagamento(),
                         cliente,
                         produtosComprados
