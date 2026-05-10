@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ecommerce-project.iml" filepath="$PROJECT_DIR$/ecommerce-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice/gateway-service/gateway-service/gateway-service.iml" filepath="$PROJECT_DIR$/microservice/gateway-service/gateway-service/gateway-service.iml" />
     </modules>
   </component>
 </project>
