@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Remove-Item \"c:\\\\projetos\\\\microservice\\\\ecommerce-project\\\\microservice\\\\pedido-service\\\\src\\\\main\\\\java\\\\com\\\\ecommerce\\\\pedido_service\\\\circuitbreaker\\\\ClienteClient.java\")",
+      "Bash(Remove-Item \"c:\\\\projetos\\\\microservice\\\\ecommerce-project\\\\microservice\\\\pedido-service\\\\src\\\\main\\\\java\\\\com\\\\ecommerce\\\\pedido_service\\\\circuitbreaker\\\\PagamentoClient.java\")",
+      "Bash(Remove-Item \"c:\\\\projetos\\\\microservice\\\\ecommerce-project\\\\microservice\\\\pedido-service\\\\src\\\\main\\\\java\\\\com\\\\ecommerce\\\\pedido_service\\\\circuitbreaker\\\\ProdutoClient.java\")"
+    ]
+  }
+}

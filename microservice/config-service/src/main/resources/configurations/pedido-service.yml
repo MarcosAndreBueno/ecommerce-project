@@ -19,8 +19,49 @@ spring:
 server:
   port: 8070
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,circuitbreakers,retries
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    retryevents:
+      enabled: true
+
 application:
   config: # !!! implementar !!! posteriormente, alterar portas para gateway
     cliente-url: http://localhost:8090/api/v1/clientes
     produto-url: http://localhost:8050/api/v1/produtos
     pagamento-url: http://localhost:8060/api/v1/pagamentos
+
+# Resilience4j Properties
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        minimum-number-of-calls: 5
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+  # Resilience4J Timeout Properties
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 3s
+
+  # Resilience4J Retry Properties
+  retry:
+    configs:
+      default:
+        max-attempts: 3
+        wait-duration: 2s

@@ -10,7 +10,7 @@
         <module name="gateway-service" />
         <module name="config-service" />
       </profile>
-      <profile name="Annotation profile for produto-service" enabled="true">
+      <profile name="Annotation profile for pedido-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

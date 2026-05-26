@@ -1,10 +1,10 @@
 package com.ecommerce.pedido_service.service;
 
 
+import com.ecommerce.pedido_service.config.ClienteClientService;
+import com.ecommerce.pedido_service.config.PagamentoClientService;
+import com.ecommerce.pedido_service.config.ProdutoClientService;
 import com.ecommerce.pedido_service.exception.PedidoException;
-import com.ecommerce.pedido_service.httpclient.ClienteHttpClient;
-import com.ecommerce.pedido_service.httpclient.PagamentoHttpClient;
-import com.ecommerce.pedido_service.httpclient.ProdutoHttpClient;
 import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacaoPayload;
 import com.ecommerce.pedido_service.mensageria.PedidoProducer;
 import com.ecommerce.pedido_service.model.DTO.*;
@@ -24,24 +24,21 @@ public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
     private final PedidoMapper pedidoMapper;
-    private final ClienteHttpClient clienteHttpClient;
-    private final ProdutoHttpClient produtoHttpClient;
+    private final ClienteClientService clienteClientService;
+    private final ProdutoClientService produtoClientService;
     private final PedidoItemService pedidoItemService;
     private final PedidoProducer pedidoProducer;
-    private final PagamentoHttpClient pagamentoHttpClient;
+    private final PagamentoClientService pagamentoClientService;
 
     @Transactional
     public Integer addPedido(PedidoRequest request) {
 
-        // validar cliente com OpenFeign
-        var cliente = this.clienteHttpClient.findClienteById(request.clienteId())
+        var cliente = this.clienteClientService.buscarPorId(request.clienteId())
                 .orElseThrow(() -> new PedidoException("Não foi possível criar pedido, pois nenhum cliente foi encontrado com o id fornecido"));
 
-        // validar produto com OpenFeign
-        var produtosComprados = produtoHttpClient.comprarProdutos(request.produtos())
+        var produtosComprados = produtoClientService.comprarProdutos(request.produtos())
                 .orElseThrow(() -> new PedidoException("Não foi possível criar pedido, pois nenhum produto foi encontrado com o id fornecido"));
 
-        // persistir pedido
         BigDecimal valorTotal = produtosComprados.stream()
                 .map(ProdutoCompraResponse::preco)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -62,7 +59,6 @@ public class PedidoService {
             );
         }
 
-        // iniciar processo de pagamento
         var pagamentoRequest = new PagamentoRequest(
                 valorTotal,
                 request.metodoPagamento(),
@@ -70,7 +66,7 @@ public class PedidoService {
                 pedido.getReferencias(),
                 cliente
         );
-        pagamentoHttpClient.iniciarProcessoPagamento(pagamentoRequest);
+        pagamentoClientService.processar(pagamentoRequest);
 
         // enviar confirmação de pedido via Kafka
         pedidoProducer.enviarNotificacaoConfimacaoPedido(
