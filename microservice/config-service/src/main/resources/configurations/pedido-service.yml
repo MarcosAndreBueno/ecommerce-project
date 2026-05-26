@@ -33,12 +33,6 @@ management:
     retryevents:
       enabled: true
 
-application:
-  config: # !!! implementar !!! posteriormente, alterar portas para gateway
-    cliente-url: http://localhost:8090/api/v1/clientes
-    produto-url: http://localhost:8050/api/v1/produtos
-    pagamento-url: http://localhost:8060/api/v1/pagamentos
-
 # Resilience4j Properties
 resilience4j:
   circuitbreaker:

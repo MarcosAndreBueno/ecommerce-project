@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(
-        name = "produto-service",
-        url = "${application.config.produto-url}"
-)
+@FeignClient(name = "produto-service", path = "/api/v1/produtos")
 public interface ProdutoHttpClient {
 
     @GetMapping("/comprar")

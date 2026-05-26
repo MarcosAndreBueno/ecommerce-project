@@ -1,4 +1,4 @@
-package com.ecommerce.pedido_service.config;
+package com.ecommerce.pedido_service.circuitbreaker;
 
 import com.ecommerce.pedido_service.httpclient.ClienteHttpClient;
 import com.ecommerce.pedido_service.model.DTO.ClienteResponse;

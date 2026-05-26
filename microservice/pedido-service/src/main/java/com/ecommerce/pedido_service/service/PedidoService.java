@@ -1,9 +1,9 @@
 package com.ecommerce.pedido_service.service;
 
 
-import com.ecommerce.pedido_service.config.ClienteClientService;
-import com.ecommerce.pedido_service.config.PagamentoClientService;
-import com.ecommerce.pedido_service.config.ProdutoClientService;
+import com.ecommerce.pedido_service.circuitbreaker.ClienteClientService;
+import com.ecommerce.pedido_service.circuitbreaker.PagamentoClientService;
+import com.ecommerce.pedido_service.circuitbreaker.ProdutoClientService;
 import com.ecommerce.pedido_service.exception.PedidoException;
 import com.ecommerce.pedido_service.mensageria.payload.PedidoConfirmacaoPayload;
 import com.ecommerce.pedido_service.mensageria.PedidoProducer;
